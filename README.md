@@ -2,6 +2,7 @@ Picthing accepts (most?) images as input and displays
 them as a series of colored block characters. Enjoy!
 
 Here is an example:
+
 ![okay exaple](https://i.imgur.com/21Pf0ri.png)
 
 Here is a much cooler example using ![asciinema](https://github.com/asciinema/asciinema):
