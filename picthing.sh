@@ -25,22 +25,22 @@ addline() {
 			pixelco=$(convert $filename -colorspace RGB -format '%[pixel:p{'$col','$prow'}]' info:-)
 			
 			# checks for image transparency
-			if [ $rgba = 'y' ]; then
+			if [ "$rgba" = 'y' ]; then
 				# checks for pixel transparency
-				if [ $pixelco = "rgba(0,0,0,0)" ]; then
+				if [ "$pixelco" = "rgba(0,0,0,0)" ]; then
 					seethru="y"
 				else
 				# alters rgb output to suit printf
-				pixelco=$(echo $pixelco | cut -c 6- | rev | cut -c 2- | rev | tr ',' ';')
-				pixelco=$(echo $pixelco | awk -F ';' '{print $1 ";" $2 ";" $3}')
+				pixelco=$(echo "$pixelco" | cut -c 6- | rev | cut -c 2- | rev | tr ',' ';')
+				pixelco=$(echo "$pixelco" | awk -F ';' '{print $1 ";" $2 ";" $3}')
 				fi
 			else
 				# alters rgb output to suit printf
-				pixelco=$(echo $pixelco | cut -c 5- | rev | cut -c 2- | rev | tr ',' ';')
+				pixelco=$(echo "$pixelco" | cut -c 5- | rev | cut -c 2- | rev | tr ',' ';')
 			fi
 
 	        # creates pixel from picture information
-			if [ $seethru = "y" ]; then
+			if [ "$seethru" = "y" ]; then
 				# prints nothing to simulate transparency
 				printf "  "
 			else
@@ -52,16 +52,16 @@ addline() {
 	        col=$((col + 1))
 
 	        # determines whether the row should end
-	        if [ $col -eq $width ]; then
+	        if [ "$col" -eq "$width" ]; then
 	        	# resets column count and increases row count
 				col=0
 	            prow=$((prow + 1))
-	            printf "\n"
+	            printf "\\n"
 	                             
 			    # chooses between exiting and looping
-	            if [ $prow -eq $maxrow ]; then
+	            if [ "$prow" -eq "$maxrow" ]; then
 					# complements the user and removes the temporary file
-	                printf "Truly a masterpeice!\n"
+	                printf "Truly a masterpeice!\\n"
 					rm $filename
 	                    exit
 	            fi
@@ -71,10 +71,10 @@ addline() {
 
 # requests filename
 while true; do
-	read -p "Enter the location of your image: " filename
+	read -r -p "Enter the location of your image: " filename
 	filecheck=$(identify "$filename" 2> /dev/null)
 	if [ "$filecheck" = "" ]; then
-		printf "Invalid file.\n"
+		printf "Invalid file.\\n"
 	else
 		break
 	fi
@@ -82,11 +82,11 @@ done
 
 # requests width
 while true; do
-	read -p "Enter the width of the output (32 or 64 is recommended): " width
+	read -r -p "Enter the width of the output (32 or 64 is recommended): " width
 	if [[ "$width" =~ ^[0-9]+$ ]]; then
 		break
 	else
-		printf "Enter a number.\n"	
+		printf "Enter a number.\\n"	
 	fi
 done
 
@@ -108,7 +108,7 @@ done
 #	printf "\n"
 
 # creates a temporary (usually smaller) version of the image
-convert $filename[0] -filter $filter -resize "$width" rsz.png
+convert "$filename"[0] -filter $filter -resize "$width" rsz.png
 filename=rsz.png
 
 # sets the max number of rows according to image height
@@ -116,7 +116,7 @@ maxrow=$(convert $filename -format "%h" info:-)
 
 # determines whether or not the image contains transparency
 rgba=$(convert $filename -colorspace RGB -format '%[pixel:p{'1','1'}]' info:- | tr -cd , | wc -c)
-if [ $rgba -eq 3 ]; then
+if [ "$rgba" -eq 3 ]; then
 	rgba="y"
 else
 	rgba="n"
