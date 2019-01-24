@@ -1,14 +1,14 @@
 #!/bin/bash
-# Prints a facsimile of whatever picture you give it 
+# Prints a quite rectangular version of whatever picture you give it 
 # Requires true color support and imagemagick
 
 # variable reference
 col=0            # column count
-curRow=0           # row count
+curRow=0         # row count
 maxRow=0         # height of image
 fileName=""      # location of image
 tempFile=""      # location of the temporary image
-rgba=""         # image transparency indicator
+rgba=""          # image transparency indicator
 seethru=""       # pixel transparency indicator
 pixelclr=""      # rgb value of pixel color
 
