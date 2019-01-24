@@ -5,13 +5,12 @@
 # variable reference
 col=0            # column count
 curRow=0           # row count
-maxrow=0         # height of image
-filename=""      # location of image
-tempfile=""      # location of the temporary image
-rgba="n"         # image transparency indicator
+maxRow=0         # height of image
+fileName=""      # location of image
+tempFile=""      # location of the temporary image
+rgba=""         # image transparency indicator
 seethru=""       # pixel transparency indicator
 pixelclr=""      # rgb value of pixel color
-filecheck=""     # uses magick to check for the file
 
 # determines whether or not the row is complete
 CheckSize()
@@ -22,10 +21,10 @@ CheckSize()
     curRow=$((curRow + 1))
     printf "\\n"
                                  
-    if [ "$curRow" -eq "$maxrow" ]; then
+    if [ "$curRow" -eq "$maxRow" ]; then
       # complements the user and removes the temporary file
       printf "Truly a masterpeice!\\n"
-      rm $tempfile
+      rm $tempFile
       exit
     fi
   fi
@@ -35,7 +34,7 @@ CheckSize()
 # does it what it says
 PrintRow() 
 {
-  pixelclr=$(convert $tempfile -colorspace RGB -format '%[pixel:p{'$col','$curRow'}]' info:-)
+  pixelclr=$(convert $tempFile -colorspace RGB -format '%[pixel:p{'$col','$curRow'}]' info:-)
 
   # checks for image transparency
   if [ "$rgba" = 'y' ]; then
@@ -62,7 +61,7 @@ PrintRow()
 # determines whether or not the image contains transparency information
 CheckTransp()
 {
-  rgba=$(convert $tempfile -colorspace RGB -format '%[pixel:p{'1','1'}]' info:- | tr -cd , | wc -c)
+  rgba=$(convert $tempFile -colorspace RGB -format '%[pixel:p{'1','1'}]' info:- | tr -cd , | wc -c)
   if [ "$rgba" -eq 3 ]; then
     rgba="y"
   else
@@ -73,8 +72,8 @@ CheckTransp()
 # creates a temporary (usually smaller) version of the image
 MakeTemp()
 {
-  convert "$filename"[0] -filter point -resize "$width" rsz.png
-  tempfile=rsz.png
+  convert "$fileName"[0] -filter point -resize "$width" rsz.png
+  tempFile=rsz.png
 }
 
 # defines maximum width of output
@@ -94,9 +93,8 @@ GetWidth()
 GetFile()
 {
   while true; do
-    read -r -p "Enter the location of your image: " filename
-    filecheck=
-    if [ "$(identify "$filename" 2> /dev/null)" = "" ]; then
+    read -r -p "Enter the location of your image: " fileName
+    if [ "$(identify "$fileName" 2> /dev/null)" = "" ]; then
       printf "Invalid file.\\n"
     else
       break
@@ -111,8 +109,8 @@ Commence()
   MakeTemp
   CheckTransp
 
-  # sets maxrow according to height of the temporary file
-  maxrow=$(convert $tempfile -format "%h" info:-)
+  # sets maxRow according to height of the temporary file
+  maxRow=$(convert $tempFile -format "%h" info:-)
 
   PrintRow
 }
