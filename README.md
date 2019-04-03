@@ -10,4 +10,4 @@ An okay example:
 
 A much better example using [asciinema](https://github.com/asciinema/asciinema):
 
-[![cool example](https://asciinema.org/a/RWbty1NZwxQy3xNo8D0uS6mFh.png)](https://asciinema.org/a/RWbty1NZwxQy3xNo8D0uS6mFh?autoplay=1)
+[![cool example](https://asciinema.org/a/238642.png)](https://asciinema.org/a/238642?autoplay=1)
