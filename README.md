@@ -1,13 +1,19 @@
-Picthing accepts (most?) images as input and draws them in the terminal using colored block characters. 
+Picthing accepts (most?) images as input and draws them in the terminal using colored block characters. Automatically resizes images to fit the width of your terminal. 
 
-**Note: Requires true color support and imagemagick**
+This is the python version of the program! Quite a bit better than the bash version:
+
+(1) Noticeably faster
+
+(2) No longer requires Imagemagick
+
+(3) Supports tab completion
+
+(4) Masterpiece is no longer misspelled
+
+**Note: Requires true color support**
 
 ## Examples:
 
-An okay example:
+Kirby!:
 
-![okay exaple](https://i.imgur.com/iCm9pq6.png)
-
-A much better example using [asciinema](https://github.com/asciinema/asciinema):
-
-[![cool example](https://asciinema.org/a/RWbty1NZwxQy3xNo8D0uS6mFh.png)](https://asciinema.org/a/RWbty1NZwxQy3xNo8D0uS6mFh?autoplay=1)
+![kirby](https://i.imgur.com/wx9hPuu.png)
