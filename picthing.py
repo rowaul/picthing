@@ -26,7 +26,7 @@ else:
 width = int(cols)
 height = int(oldH/(2*oldW/width))
 
-nuImg = usrImg.convert('RGBA').resize((width,height))
+nuImg = usrImg.convert('RGBA').resize((width,height),resample=Image.LANCZOS)
 
 for y in range(height):
   for x in range(width):

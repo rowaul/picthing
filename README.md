@@ -16,4 +16,4 @@ This is the python version of the program! Quite a bit better than the bash vers
 
 Kirby!:
 
-![kirby](https://i.imgur.com/wx9hPuu.png)
+![kirby](https://i.imgur.com/2pvxYeI.png)
