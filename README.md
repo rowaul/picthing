@@ -1,4 +1,4 @@
-Picthing accepts (most?) images as input and draws them in the terminal using colored block characters. Automatically resizes images to fit the width of your terminal. 
+Pycthing accepts (most?) images as input and draws them in the terminal using colored block characters. Automatically resizes images to fit the width of your terminal. 
 
 This is the python version of the program! Quite a bit better than the bash version:
 
